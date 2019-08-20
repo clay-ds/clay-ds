@@ -1,0 +1,382 @@
+{
+	"info": {
+		"_postman_id": "7ee41185-fbb4-46b8-b34f-fca4f9b54af1",
+		"name": "DoorUnlocker",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Management",
+			"item": [
+				{
+					"name": "Create Office",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d13d0463-0f67-499f-8214-94a99265304e",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "9bcd362b-915b-4398-9bd3-29cc0ddb4fc9",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access-token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Name\": \"Office\"\n}"
+						},
+						"url": {
+							"raw": "{{api}}/api/offices",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"api",
+								"offices"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Door",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d13d0463-0f67-499f-8214-94a99265304e",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "9bcd362b-915b-4398-9bd3-29cc0ddb4fc9",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access-token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Name\": \"Door\"\n}"
+						},
+						"url": {
+							"raw": "{{api}}/api/offices/12/doors",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"api",
+								"offices",
+								"12",
+								"doors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Office",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7d50d613-fb30-4676-9fad-64ce1d49d2f4",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access-token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api}}/api/offices/12",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"api",
+								"offices",
+								"12"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Office",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7d50d613-fb30-4676-9fad-64ce1d49d2f4",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access-token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api}}/api/offices/12",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"api",
+								"offices",
+								"12"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "DoorAccess",
+			"item": [
+				{
+					"name": "Grant Permissions",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "5be3f94b-d0aa-4184-b939-a67b9dd55220",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "5552d026-2495-435d-a52b-a5af4b39e476",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access-token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"permittedDoors\": [ 1, 11 ]\n}"
+						},
+						"url": {
+							"raw": "{{api}}/api/users/1/door-permissions",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"1",
+								"door-permissions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Verify Access",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b2014a3f-aefa-4646-aa46-b1d3f33b6f32",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access-token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api}}/api/offices/12/doors/11/entrance",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"api",
+								"offices",
+								"12",
+								"doors",
+								"11",
+								"entrance"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Get Token",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "57bdb788-8630-41eb-9cc8-34ba40c557d6",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "f2034b6c-060c-4f55-8c48-249dea44ad89",
+						"exec": [
+							"pm.environment.set(\"access-token\", pm.response.json().access_token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "client_id",
+							"value": "{{client-id}}",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "{{client-secret}}",
+							"type": "text"
+						},
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "Admin",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "password",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{identity-server}}/connect/token",
+					"host": [
+						"{{identity-server}}"
+					],
+					"path": [
+						"connect",
+						"token"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

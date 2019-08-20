@@ -1,0 +1,1018 @@
+{
+	"info": {
+		"_postman_id": "c4dea96b-93e4-4deb-aa67-9271c0bd52ba",
+		"name": "DoorUnlocker #tests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "SetUp",
+			"item": [
+				{
+					"name": "Get Admin Token",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "57bdb788-8630-41eb-9cc8-34ba40c557d6",
+								"exec": [
+									"var user = JSON.parse(pm.variables.get(\"admin-user\"));",
+									"pm.variables.set(\"username\", user.username);",
+									"pm.variables.set(\"password\", user.password);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "f2034b6c-060c-4f55-8c48-249dea44ad89",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Includes access token\", function () {",
+									"    pm.expect(pm.response.json()).to.include.keys(\"access_token\");",
+									"});",
+									"",
+									"pm.variables.set(\"admin-token\", pm.response.json().access_token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "client_id",
+									"value": "{{client-id}}",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "{{client-secret}}",
+									"type": "text"
+								},
+								{
+									"key": "grant_type",
+									"value": "password",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "{{username}}",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "{{password}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{identity-server}}/connect/token",
+							"host": [
+								"{{identity-server}}"
+							],
+							"path": [
+								"connect",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Employee Token",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "57bdb788-8630-41eb-9cc8-34ba40c557d6",
+								"exec": [
+									"var user = JSON.parse(pm.variables.get(\"employee-user\"));",
+									"pm.variables.set(\"username\", user.username);",
+									"pm.variables.set(\"password\", user.password);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "f2034b6c-060c-4f55-8c48-249dea44ad89",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Includes access token\", function () {",
+									"    pm.expect(pm.response.json()).to.include.keys(\"access_token\");",
+									"});",
+									"",
+									"pm.variables.set(\"employee-token\", pm.response.json().access_token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "client_id",
+									"value": "{{client-id}}",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "{{client-secret}}",
+									"type": "text"
+								},
+								{
+									"key": "grant_type",
+									"value": "password",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "{{username}}",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "{{password}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{identity-server}}/connect/token",
+							"host": [
+								"{{identity-server}}"
+							],
+							"path": [
+								"connect",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Office",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d13d0463-0f67-499f-8214-94a99265304e",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Includes office ID\", function () {",
+									"    pm.expect(pm.response.json()).to.include.keys(\"officeId\");",
+									"});",
+									"",
+									"pm.variables.set(\"office-id\", pm.response.json().officeId);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "9bcd362b-915b-4398-9bd3-29cc0ddb4fc9",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin-token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Name\": \"Test Office\"\n}"
+						},
+						"url": {
+							"raw": "{{api}}/api/offices",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"api",
+								"offices"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Door",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d13d0463-0f67-499f-8214-94a99265304e",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Includes office ID\", function () {",
+									"    pm.expect(pm.response.json()).to.include.keys(\"doorId\");",
+									"});",
+									"",
+									"pm.variables.set(\"door-id\", pm.response.json().doorId);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "9bcd362b-915b-4398-9bd3-29cc0ddb4fc9",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin-token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Name\": \"Test Door\"\n}"
+						},
+						"url": {
+							"raw": "{{api}}/api/offices/{{office-id}}/doors",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"api",
+								"offices",
+								"{{office-id}}",
+								"doors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Validate CanNot Create Office Without Name",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d13d0463-0f67-499f-8214-94a99265304e",
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "9bcd362b-915b-4398-9bd3-29cc0ddb4fc9",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{admin-token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Name\": \"\"\n}"
+						},
+						"url": {
+							"raw": "{{api}}/api/offices",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"api",
+								"offices"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "DoorAccess",
+			"item": [
+				{
+					"name": "Grant Permissions",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "5be3f94b-d0aa-4184-b939-a67b9dd55220",
+								"exec": [
+									"var user = JSON.parse(pm.variables.get(\"employee-user\"));",
+									"pm.variables.set(\"user-id\", user.id);",
+									"",
+									"var request = {",
+									"    permittedDoors: [",
+									"        pm.variables.get(\"door-id\")]",
+									"};",
+									"",
+									"pm.variables.set(\"request\", JSON.stringify(request));"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "5552d026-2495-435d-a52b-a5af4b39e476",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin-token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{{request}}"
+						},
+						"url": {
+							"raw": "{{api}}/api/users/{{user-id}}/door-permissions",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"{{user-id}}",
+								"door-permissions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Verify Access",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b2014a3f-aefa-4646-aa46-b1d3f33b6f32",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{employee-token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api}}/api/offices/{{office-id}}/doors/{{door-id}}/entrance",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"api",
+								"offices",
+								"{{office-id}}",
+								"doors",
+								"{{door-id}}",
+								"entrance"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Verify Admin Access",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b2014a3f-aefa-4646-aa46-b1d3f33b6f32",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin-token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api}}/api/offices/{{office-id}}/doors/{{door-id}}/entrance",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"api",
+								"offices",
+								"{{office-id}}",
+								"doors",
+								"{{door-id}}",
+								"entrance"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Revoke Permissions",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "5be3f94b-d0aa-4184-b939-a67b9dd55220",
+								"exec": [
+									"var user = JSON.parse(pm.variables.get(\"employee-user\"));",
+									"pm.variables.set(\"user-id\", user.id);",
+									"",
+									"var request = {",
+									"    permittedDoors: []",
+									"};",
+									"",
+									"pm.variables.set(\"request\", JSON.stringify(request));"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "5552d026-2495-435d-a52b-a5af4b39e476",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin-token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{{request}}"
+						},
+						"url": {
+							"raw": "{{api}}/api/users/{{user-id}}/door-permissions",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"{{user-id}}",
+								"door-permissions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Verify No Access",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b2014a3f-aefa-4646-aa46-b1d3f33b6f32",
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {",
+									"    pm.response.to.have.status(403);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{employee-token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api}}/api/offices/{{office-id}}/doors/{{door-id}}/entrance",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"api",
+								"offices",
+								"{{office-id}}",
+								"doors",
+								"{{door-id}}",
+								"entrance"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Verify No Auth Has No Access",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b2014a3f-aefa-4646-aa46-b1d3f33b6f32",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{api}}/api/offices/{{office-id}}/doors/{{door-id}}/entrance",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"api",
+								"offices",
+								"{{office-id}}",
+								"doors",
+								"{{door-id}}",
+								"entrance"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Verify History",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b2014a3f-aefa-4646-aa46-b1d3f33b6f32",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"// 1 entrance of admin and 1 of employee",
+									"pm.test(\"Count of entrances is 2\", function () {",
+									"    pm.expect(pm.response.json().length).to.eql(2);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin-token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api}}/api/offices/{{office-id}}/doors/{{door-id}}/history?count=10",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"api",
+								"offices",
+								"{{office-id}}",
+								"doors",
+								"{{door-id}}",
+								"history"
+							],
+							"query": [
+								{
+									"key": "count",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ManagementAccess",
+			"item": [
+				{
+					"name": "Verify Employee CanNot Create Office",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d13d0463-0f67-499f-8214-94a99265304e",
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {",
+									"    pm.response.to.have.status(403);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "9bcd362b-915b-4398-9bd3-29cc0ddb4fc9",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{employee-token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Name\": \"Test Office\"\n}"
+						},
+						"url": {
+							"raw": "{{api}}/api/offices",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"api",
+								"offices"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Verify Employee CanNot Create Door",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "39da4923-8ce1-4ab5-8bb4-9ea42811b660",
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {",
+									"    pm.response.to.have.status(403);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "feb98612-718a-4038-8c62-ae7d43b403d6",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{employee-token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Name\": \"Test Door\"\n}"
+						},
+						"url": {
+							"raw": "{{api}}/api/offices/{{office-id}}/doors",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"api",
+								"offices",
+								"{{office-id}}",
+								"doors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Verify No Auth CanNot Create Office",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d13d0463-0f67-499f-8214-94a99265304e",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "9bcd362b-915b-4398-9bd3-29cc0ddb4fc9",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "",
+								"type": "text",
+								"value": "",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Name\": \"Test Office\"\n}"
+						},
+						"url": {
+							"raw": "{{api}}/api/offices",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"api",
+								"offices"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "TearDown",
+			"item": [
+				{
+					"name": "Delete Office",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7d50d613-fb30-4676-9fad-64ce1d49d2f4",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin-token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api}}/api/offices/{{office-id}}",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"api",
+								"offices",
+								"{{office-id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Verify Office Deleted",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7d50d613-fb30-4676-9fad-64ce1d49d2f4",
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin-token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api}}/api/offices/{{office-id}}",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"api",
+								"offices",
+								"{{office-id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "ccd50264-33e7-4369-98a7-c5f001253774",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "b6a57cb6-3de0-4c28-bbba-3f4e0c629cec",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
